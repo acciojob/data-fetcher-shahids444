@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function DataFetcher() {
   const [data, setData] = useState(null);
@@ -46,14 +46,22 @@ export default function DataFetcher() {
         </div>
       )}
       
-      {data && !loading && (
+      {!loading && !error && (
         <div>
-          <p className="mb-4 text-gray-700">
-            Data fetched successfully from: <code className="bg-gray-100 px-2 py-1 rounded">https://dummyjson.com/products</code>
-          </p>
-          <pre className="bg-gray-50 border rounded-lg p-4 overflow-auto text-sm max-h-96 whitespace-pre-wrap">
-            {JSON.stringify(data, null, 2)}
-          </pre>
+          {data ? (
+            <div>
+              <p className="mb-4 text-gray-700">
+                Data fetched successfully from: <code className="bg-gray-100 px-2 py-1 rounded">https://dummyjson.com/products</code>
+              </p>
+              <pre className="bg-gray-50 border rounded-lg p-4 overflow-auto text-sm max-h-96 whitespace-pre-wrap">
+                {JSON.stringify(data, null, 2)}
+              </pre>
+            </div>
+          ) : (
+            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+              No data found
+            </div>
+          )}
         </div>
       )}
     </div>
